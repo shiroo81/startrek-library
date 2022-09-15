@@ -15,7 +15,9 @@ export async function getCharacters(query) {
 export async function createCharacter() {
   await fakeNetwork();
   let id = Math.random().toString(36).substring(2, 9);
-  let character = { id, createdAt: Date.now() };
+  let uid, name, gender, yearOfBirth, monthOfBirth, dayOfBirth, placeOfBirth, yearOfDeath, monthOfDeath, dayOfDeath, placeOfDeath, height, weight, deceased, bloodType, maritalStatus, serialNumber, hologramActivationDate, hologramStatus, hologramDateStatus, hologram, fictionalCharacter, mirror, alternateReality;
+  // let character = { id, createdAt: Date.now() };
+      let character = {id, name, gender, yearOfBirth, monthOfBirth, dayOfBirth, placeOfBirth, yearOfDeath, monthOfDeath, dayOfDeath, placeOfDeath, height, weight, deceased, bloodType, maritalStatus, serialNumber, hologramActivationDate, hologramStatus, hologramDateStatus, hologram, fictionalCharacter, mirror, alternateReality};
   let characters = await getCharacters();
   characters.unshift(character);
   await set(characters);
@@ -23,7 +25,7 @@ export async function createCharacter() {
 }
 
 export async function getCharacter(id) {
-  await fakeNetwork(`contact:${id}`);
+  await fakeNetwork(`character:${id}`);
   let characters = await localforage.getItem("characters");
   let character = characters.find((character) => character.id === id);
   return character ?? null;

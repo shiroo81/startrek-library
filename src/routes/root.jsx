@@ -9,6 +9,24 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import { getCharacters, createCharacter } from "../characters";
+import localforage from "localforage";
+
+async function getCharactersFromAPI() {
+  const data = await fetch('http://stapi.co/api/v1/rest/character/search');
+  return data;
+}
+
+getCharactersFromAPI().then((resp) => {
+  resp.json().then((resp) => {
+    saveDataToDb(resp.characters);
+  })
+}).catch((error) => console.log(err))
+
+function saveDataToDb (data) {
+  localforage.setItem('characters',  data).then(() => {
+    console.log(`Characters are added to the database`);
+  })
+}
 
 export async function loader({ request }) {
   const url = new URL(request.url);
