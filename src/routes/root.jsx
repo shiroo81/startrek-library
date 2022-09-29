@@ -12,20 +12,14 @@ import { getCharacters, createCharacter } from "../characters";
 import localforage from "localforage";
 
 async function getCharactersFromAPI() {
-  const data = await fetch('http://stapi.co/api/v1/rest/character/search');
+  const data = await fetch("http://stapi.co/api/v1/rest/character/search");
   return data;
 }
 
-getCharactersFromAPI().then((resp) => {
-  resp.json().then((resp) => {
-    saveDataToDb(resp.characters);
-  })
-}).catch((error) => console.log(err))
-
-function saveDataToDb (data) {
-  localforage.setItem('characters',  data).then(() => {
+function saveDataToDb(data) {
+  localforage.setItem("characters", data).then(() => {
     console.log(`Characters are added to the database`);
-  })
+  });
 }
 
 export async function loader({ request }) {
@@ -49,6 +43,13 @@ export default function Root() {
     new URLSearchParams(navigation.location.search).has("q");
 
   useEffect(() => {
+    getCharactersFromAPI()
+      .then((resp) => {
+        resp.json().then((resp) => {
+          saveDataToDb(resp.characters);
+        });
+      })
+      .catch((error) => console.log(err));
     document.getElementById("q").value = q;
   }, [q]);
 
@@ -85,20 +86,20 @@ export default function Root() {
           {characters.length ? (
             <ul>
               {characters.map((character) => (
-                <li key={character.id}>
+                <li key={character.uid}>
                   <NavLink
-                    to={`characters/${character.id}`}
+                    to={`characters/${character.uid}`}
                     className={({ isActive, isPending }) =>
                       isActive ? "active" : isPending ? "pending" : ""
                     }
                   >
-                    <Link to={`characters/${character.id}`}>
-                      {character.first || character.last ? (
+                    <Link to={`characters/${character.uid}`}>
+                      {character.name ? (
                         <>
-                          {character.first} {character.last}
+                          {character.name}
                         </>
                       ) : (
-                        <i>No Name</i>
+                        <i>New entry</i>
                       )}{" "}
                       {character.favorite && <span>★</span>}
                     </Link>

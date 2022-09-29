@@ -30,28 +30,25 @@ export default function Character() {
 
       <div>
         <h1>
-          {character.first || character.last ? (
+          {character.name ? (
             <>
-              {character.first} {character.last}
+              {character.name}
             </>
           ) : (
-            <i>No Name</i>
+            <i>New entry</i>
           )}{" "}
           <Favorite character={character} />
         </h1>
 
-        {character.twitter && (
+        {character.gender && (
           <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${character.twitter}`}
-            >
-              {character.twitter}
-            </a>
+            <a>
+              {character.gender}
+              </a>
           </p>
         )}
 
-        {character.notes && <p>{character.notes}</p>}
+        {character.yearOfBirth && <p>{character.yearOfBirth}</p>}
 
         <div>
           <Form action="edit">
