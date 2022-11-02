@@ -12,9 +12,31 @@ import { getCharacters, createCharacter } from "../characters";
 import localforage from "localforage";
 
 async function getCharactersFromAPI() {
-  const data = await fetch("http://stapi.co/api/v1/rest/character/search");
+  const data = await fetch("http://stapi.co/api/v1/rest/character/search", {
+    headers: {
+      accept: "*/*",
+      "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/x-www-form-urlencoded",
+      Referer: "http://stapi.co/api-browser",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+    body: "title=pi&name=pi",
+    method: "POST",
+  });
   return data;
 }
+
+fetch("http://stapi.co/api/v1/rest/character/search", {
+  headers: {
+    accept: "*/*",
+    "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/x-www-form-urlencoded",
+    Referer: "http://stapi.co/api-browser",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+  },
+  body: "title=rixx&name=rixx",
+  method: "POST",
+});
 
 function saveDataToDb(data) {
   localforage.setItem("characters", data).then(() => {
@@ -84,7 +106,7 @@ export default function Root() {
         </div>
         <nav>
           {characters.length ? (
-            <ul>
+            <ul className="characterList">
               {characters.map((character) => (
                 <li key={character.uid}>
                   <NavLink
@@ -95,9 +117,7 @@ export default function Root() {
                   >
                     <Link to={`characters/${character.uid}`}>
                       {character.name ? (
-                        <>
-                          {character.name}
-                        </>
+                        <>{character.name}</>
                       ) : (
                         <i>New entry</i>
                       )}{" "}
