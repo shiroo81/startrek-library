@@ -21,43 +21,38 @@ export default function Edit() {
       <p>
         <span>Name</span>
         <input
-          placeholder="Jean-Luc"
-          aria-label="First name"
+          placeholder="Jean-Luc Picard"
+          aria-label="Name"
           type="text"
-          name="first"
-          defaultValue={character.first}
-        />
-        <input
-          placeholder="Picard"
-          aria-label="Last name"
-          type="text"
-          name="last"
-          defaultValue={character.last}
+          name="name"
+          defaultValue={character.name}
         />
       </p>
-      <label>
-        <span>Twitter</span>
-        <input
-          type="text"
-          name="twitter"
-          placeholder="@jeanlucpicard"
-          defaultValue={character.twitter}
-        />
-      </label>
       <label>
         <span>Avatar URL</span>
         <input
           placeholder="https://example.com/avatar.jpg"
-          aria-label="Avatar URL"
           type="text"
           name="avatar"
           defaultValue={character.avatar}
         />
       </label>
-      <label>
-        <span>Notes</span>
-        <textarea name="notes" defaultValue={character.notes} rows={6} />
-      </label>
+      <p>
+        <label>
+          <span>Gender</span>
+          <input type="text" name="gender" defaultValue={character.gender} />
+        </label>
+      </p>
+      <p>
+        <label>
+          <span>YearOfBirth</span>
+          <input
+            type="text"
+            name="yearOfBirth"
+            defaultValue={character.yearOfBirth}
+          />{" "}
+        </label>
+      </p>
       <p>
         <button type="submit">Save</button>
         <button

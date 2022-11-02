@@ -25,33 +25,27 @@ export default function Character() {
   return (
     <div id="character">
       <div>
-        <img key={character.avatar} src={character.avatar || null} />
+        <img character-form-avatar key={character.avatar} src={character.avatar || null} />
       </div>
 
       <div>
-        <h1>
-          {character.first || character.last ? (
-            <>
-              {character.first} {character.last}
-            </>
-          ) : (
-            <i>No Name</i>
-          )}{" "}
+        <h1 id="character">
+          {character.name ? <>{character.name}</> : <i>New entry</i>}{" "}
           <Favorite character={character} />
         </h1>
 
-        {character.twitter && (
+        {character.gender && (
           <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${character.twitter}`}
-            >
-              {character.twitter}
-            </a>
+            <a>{character.gender}</a>
           </p>
         )}
 
-        {character.notes && <p>{character.notes}</p>}
+        {character.yearOfBirth && <p>{character.yearOfBirth}</p>}
+        {character.placeOfBirth && <p>{character.placeOfBirth}</p>}
+        {character.yearOfDeath && <p>{character.yearOfDeath}</p>}
+        {character.maritalStatus && <p>{character.maritalStatus}</p>}
+        {character.alternateReality && <p>{character.alternateReality}</p>}
+        {character.fictionalCharacter && <p>{character.fictionalCharacter}</p>}
 
         <div>
           <Form action="edit">
@@ -66,7 +60,7 @@ export default function Character() {
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button class="btn-delete" type="submit">Delete</button>
           </Form>
         </div>
       </div>
@@ -82,13 +76,14 @@ function Favorite({ character }) {
   }
   return (
     <fetcher.Form method="post">
-      <button
+      <button 
+        class="fav"
         name="favorite"
         value={favorite ? "false" : "true"}
         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
       >
         {favorite ? "★" : "☆"}
       </button>
-      </fetcher.Form>
+    </fetcher.Form>
   );
 }

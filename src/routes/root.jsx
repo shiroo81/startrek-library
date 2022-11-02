@@ -9,6 +9,40 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import { getCharacters, createCharacter } from "../characters";
+import localforage from "localforage";
+
+async function getCharactersFromAPI() {
+  const data = await fetch("http://stapi.co/api/v1/rest/character/search", {
+    headers: {
+      accept: "*/*",
+      "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
+      "content-type": "application/x-www-form-urlencoded",
+      Referer: "http://stapi.co/api-browser",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+    body: "title=pi&name=pi",
+    method: "POST",
+  });
+  return data;
+}
+
+fetch("http://stapi.co/api/v1/rest/character/search", {
+  headers: {
+    accept: "*/*",
+    "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/x-www-form-urlencoded",
+    Referer: "http://stapi.co/api-browser",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+  },
+  body: "title=rixx&name=rixx",
+  method: "POST",
+});
+
+function saveDataToDb(data) {
+  localforage.setItem("characters", data).then(() => {
+    console.log(`Characters are added to the database`);
+  });
+}
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -31,6 +65,13 @@ export default function Root() {
     new URLSearchParams(navigation.location.search).has("q");
 
   useEffect(() => {
+    getCharactersFromAPI()
+      .then((resp) => {
+        resp.json().then((resp) => {
+          saveDataToDb(resp.characters);
+        });
+      })
+      .catch((error) => console.log(err));
     document.getElementById("q").value = q;
   }, [q]);
 
@@ -65,22 +106,20 @@ export default function Root() {
         </div>
         <nav>
           {characters.length ? (
-            <ul>
+            <ul className="characterList">
               {characters.map((character) => (
-                <li key={character.id}>
+                <li key={character.uid}>
                   <NavLink
-                    to={`characters/${character.id}`}
+                    to={`characters/${character.uid}`}
                     className={({ isActive, isPending }) =>
                       isActive ? "active" : isPending ? "pending" : ""
                     }
                   >
-                    <Link to={`characters/${character.id}`}>
-                      {character.first || character.last ? (
-                        <>
-                          {character.first} {character.last}
-                        </>
+                    <Link to={`characters/${character.uid}`}>
+                      {character.name ? (
+                        <>{character.name}</>
                       ) : (
-                        <i>No Name</i>
+                        <i>New entry</i>
                       )}{" "}
                       {character.favorite && <span>★</span>}
                     </Link>
