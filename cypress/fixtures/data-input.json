@@ -1,0 +1,20 @@
+[{
+  "testcase": "First",
+  "name": "Paul",
+  "avatar": "https://www.zooplus.nl/magazine/wp-content/uploads/2018/08/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison-768x547.jpeg",
+  "gender": "male",
+  "yearOfBirth": "1981"
+},
+{
+  "testcase": "Second",
+  "name": "Olivier",
+  "avatar": "https://www.renske.com/hubfs/5.%20Kitten%20het%20eerste%20jaar%20met%20je%20nieuwe%20kitten/tran-mau-tri-tam-wiqbi_Uyvx8-unsplash.jpg",
+  "gender": "male",
+  "yearOfBirth": "2014"
+},{
+  "testcase": "Third",
+  "name": "Lucien",
+  "avatar": "https://www.organimal.nl/wp-content/uploads/2020/01/kitten-ontwormen.jpg",
+  "gender": "male",
+  "yearOfBirth": "2016"
+}]
