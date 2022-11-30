@@ -108,7 +108,7 @@ export default function Root() {
           {characters.length ? (
             <ul className="characterList">
               {characters.map((character) => (
-                <li key={character.uid}>
+                <li key={character.uid} data-testid={character.uid}>
                   <NavLink
                     to={`characters/${character.uid}`}
                     className={({ isActive, isPending }) =>

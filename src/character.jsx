@@ -29,7 +29,7 @@ export default function Character() {
       </div>
 
       <div>
-        <h1 id="character">
+        <h1>
           {character.name ? <>{character.name}</> : <i>New entry</i>}{" "}
           <Favorite character={character} />
         </h1>

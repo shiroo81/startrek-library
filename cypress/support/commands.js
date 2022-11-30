@@ -1,25 +1,28 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+/// <reference types="cypress" />
+
+Cypress.Commands.add("getSelEl", (value) => cy.get(`[data-testid=${value}]`));
+
+Cypress.Commands.add("injectTestdata", (name, avatar, gender, yearOfBirth) => {
+  cy.intercept("POST", "http://stapi.co/api/v1/rest/character/search").as(
+    "postSearch"
+  );
+
+  cy.get("button").contains("New").click();
+  cy.wait("@postSearch");
+
+  cy.get("i").contains("New entry").click();
+  cy.url().should("include", "/characters/");
+
+  cy.get("button").contains("Edit").click();
+  cy.url().should("include", "/edit");
+
+  cy.get("span").contains("Name").siblings("input").type(name);
+
+  cy.get('[name="avatar"]').type(avatar);
+
+  cy.get('input[name="gender"]').type(gender);
+
+  cy.get("span").contains("YearOfBirth").siblings("input").type(yearOfBirth);
+
+  cy.get("#contact-form").submit();
+});

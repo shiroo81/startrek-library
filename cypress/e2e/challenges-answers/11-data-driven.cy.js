@@ -1,31 +1,31 @@
+/// <reference types="cypress" />
+
 import characterdata from "../fixtures/data-input.json";
+// BONUS ASSIGNMENT: WRITE A DYNAMIC TEST WHERE YOU CAN IMPORT FIXTURE DATA 
+// AND INJECT THE DYNAMIC VARIABLES IN YOUR SCRIPT.
+// EXTRA BONUS: ADD A DYNAMIC VARIABLE TO THE TEST CASE NAMES AS WELL.
 
 characterdata.forEach((c) => {
-
   describe(`When Data-Driven-Testing with Cypress the ${c.testcase} time`, () => {
     it(`Then I should be able to dynamically generate testcases edit ${c.name}`, () => {
       cy.visit("/characters/CHMA0000206844");
       cy.get("button").contains("Edit").click();
 
-      cy.get("span").contains("Name").siblings("input").clear().type(c.name);
-      cy.get('input[name="gender"]').clear().type(c.gender);
+      cy.getSelEl("inputName").clear().type(c.name);
+      cy.getSelEl("inputGender").clear().type(c.gender);
 
-      cy.get("span")
-        .contains("Avatar URL")
-        .siblings("input")
+      cy.getSelEl("inputAvatar")
         .clear()
         .type(c.avatar);
 
-      cy.get("span")
-        .contains("YearOfBirth")
-        .siblings("input")
+      cy.getSelEl("inputyearOfBirth")
         .clear()
         .type(c.yearOfBirth);
 
       cy.get("button").contains("Save").click();
     });
   });
-  
 });
+
 
 
