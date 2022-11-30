@@ -26,6 +26,7 @@ export default function Edit() {
           type="text"
           name="name"
           defaultValue={character.name}
+          data-testid="inputName"
         />
       </p>
       <label>
@@ -35,12 +36,14 @@ export default function Edit() {
           type="text"
           name="avatar"
           defaultValue={character.avatar}
+          data-testid="inputAvatar"
         />
       </label>
       <p>
         <label>
           <span>Gender</span>
-          <input type="text" name="gender" defaultValue={character.gender} />
+          <input type="text" name="gender" defaultValue={character.gender} data-testid="inputGender"
+/>
         </label>
       </p>
       <p>
@@ -50,6 +53,7 @@ export default function Edit() {
             type="text"
             name="yearOfBirth"
             defaultValue={character.yearOfBirth}
+            data-testid="inputyearOfBirth"
           />{" "}
         </label>
       </p>
