@@ -5,8 +5,10 @@ describe("Given I want to work with hooks", () => {
     // Move the visit to a before or beforeEach hook.
 
     it("Then I should be able to use them accordingly", () => {
-      cy.visit("/characters/CHMA0000206844");
+      cy.visit("/");
       cy.log('This the logging for testcase 1')
+      cy.get("a").contains("Brent Spiner").click();
+
       // Add testcode
     });
 

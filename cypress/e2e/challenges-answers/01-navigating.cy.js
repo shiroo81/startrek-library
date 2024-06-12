@@ -6,12 +6,12 @@ describe("Given there is are multiple pages", () => {
 
     it("Then should visit the homepage", () => {
       // Write the command to go the homepage.
-      cy.visit("/");
+      cy.visit("");
     });
 
     it("Then should use the navigation menu to open a character page", () => {
       // Open a card of one of the characters.
-      cy.get("a").contains("Robert Picard").click();
+      cy.get("a").contains("Brent Spiner").click();
     });
 
     it("Then should navigate directly to the character", () => {

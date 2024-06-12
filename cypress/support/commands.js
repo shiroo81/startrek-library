@@ -26,3 +26,8 @@ Cypress.Commands.add("injectTestdata", (name, avatar, gender, yearOfBirth) => {
 
   cy.get("#contact-form").submit();
 });
+
+export function setLocalStorage(value) {
+  const flowstap = JSON.stringify(value);
+  sessionStorage.setItem("form-data", flowstap);
+}
