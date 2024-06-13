@@ -12,12 +12,12 @@ import { getCharacters, createCharacter } from "../characters";
 import localforage from "localforage";
 
 async function getCharactersFromAPI() {
-  const data = await fetch("http://stapi.co/api/v1/rest/character/search", {
+  const data = await fetch("https://stapi.co/api/v1/rest/character/search", {
     headers: {
       accept: "*/*",
       "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
       "content-type": "application/x-www-form-urlencoded",
-      Referer: "http://stapi.co/api-browser",
+      Referer: "https://stapi.co/api-browser",
       "Referrer-Policy": "strict-origin-when-cross-origin",
     },
     body: "title=pi&name=pi",
@@ -26,12 +26,12 @@ async function getCharactersFromAPI() {
   return data;
 }
 
-fetch("http://stapi.co/api/v1/rest/character/search", {
+fetch("https://stapi.co/api/v1/rest/character/search", {
   headers: {
     accept: "*/*",
     "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
     "content-type": "application/x-www-form-urlencoded",
-    Referer: "http://stapi.co/api-browser",
+    Referer: "https://stapi.co/api-browser",
     "Referrer-Policy": "strict-origin-when-cross-origin",
   },
   body: "title=rixx&name=rixx",

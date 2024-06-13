@@ -6,7 +6,7 @@ describe("Given there is are multiple pages", () => {
 
     it("Then should visit the homepage", () => {
       // Write the command to go the homepage.
-      cy.visit("");
+      cy.visit("/");
     });
 
     it("Then should use the navigation menu to open a character page", () => {
