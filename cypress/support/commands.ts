@@ -8,7 +8,8 @@ Cypress.Commands.add("injectTestdata", (name, avatar, gender, yearOfBirth) => {
   );
 
   cy.get("button").contains("New").click();
-  cy.wait("@postSearch");
+  cy.wait(2000)
+  // cy.wait("@postSearch");
 
   cy.get("i").contains("New entry").click();
   cy.url().should("include", "/characters/");

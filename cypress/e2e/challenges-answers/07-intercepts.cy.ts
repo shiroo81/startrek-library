@@ -7,7 +7,7 @@ describe(`When working with Network requests`, () => {
   it(`Then I should be able to intercept an API calls`, () => {
     cy.intercept({
       method: "POST",
-      url: "http://stapi.co/api/v1/rest/character/search",
+      url: "https://stapi.co/api/v1/rest/character/search",
     });
 
     cy.visit('');
@@ -18,11 +18,11 @@ describe(`When working with Network requests`, () => {
   // BONUS: Use cy.intercept() to catch an API call, give it an alias and wait for the execution.
   it(`Then I should be able to intercept an API call and wait for it`, () => {
     cy.intercept({
-      method: "POST",
-      url: "http://stapi.co/api/v1/rest/character/search",
+      url: "https://stapi.co/api/v1/rest/character/search",
     }).as("postSearch");
 
-    cy.visit('');
+    cy.visit('/');
+    cy.contains('p', 'Welcome to the Star Trek Library.');
     // Wait for the call to have finished.
     cy.wait('@postSearch');
   });

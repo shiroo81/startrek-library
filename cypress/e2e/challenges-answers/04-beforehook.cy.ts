@@ -8,18 +8,19 @@ describe("Given I want to work with hooks", () => {
       cy.visit("/");
       cy.log('This the logging for testcase 1')
       cy.get("a").contains("Brent Spiner").click();
-
-      // Add testcode
     });
 
     it("Then should be possible to submit a form", () => {
-      cy.visit("/characters/CHMA0000206844");
+      cy.visit("/characters/CHMA0000050553");
       cy.log('This the logging for testcase 2')
-      // add testcode
     });
 
     // Use before or beforeEach and notice the difference.
-    before(() => {
+    beforeEach(() => {
+      cy.log('BEFOREEACH HOOK');
+    });
+    beforeEach(() => {
+      cy.log('BEFORE HOOK');
     });
   });
 });

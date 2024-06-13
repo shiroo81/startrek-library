@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import localforage from "localforage";
 
 describe(`When working with Network requests`, () => {
   it(`Then I should be able to use these API calls`, () => {
@@ -9,7 +8,7 @@ describe(`When working with Network requests`, () => {
     cy.intercept(
       {
         method: "POST",
-        url: "http://stapi.co/api/v1/rest/character/search",
+        url: "https://stapi.co/api/v1/rest/character/search",
       },
       { fixture: "test-data.json" }
     ).as("postSearch");
