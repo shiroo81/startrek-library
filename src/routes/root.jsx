@@ -39,6 +39,7 @@ fetch("https://stapi.co/api/v1/rest/character/search", {
 });
 
 function saveDataToDb(data) {
+  console.log('LF_ SaveDataTODB');
   localforage.setItem("characters", data).then(() => {
     console.log(`Characters are added to the database`);
   });
@@ -53,6 +54,7 @@ export async function loader({ request }) {
 
 export async function action() {
   await createCharacter();
+  console.log('LF_ CALLCreateCharacter');
 }
 
 export default function Root() {

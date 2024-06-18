@@ -16,16 +16,17 @@ export async function createCharacter() {
   await fakeNetwork();
   let uid = Math.random().toString(36).substring(2, 9);
   let name, gender, yearOfBirth, monthOfBirth, dayOfBirth, placeOfBirth, yearOfDeath, monthOfDeath, dayOfDeath, placeOfDeath, height, weight, deceased, bloodType, maritalStatus, serialNumber, hologramActivationDate, hologramStatus, hologramDateStatus, hologram, fictionalCharacter, mirror, alternateReality;
-  // let character = { id, createdAt: Date.now() };
-      let character = {uid, name, gender, yearOfBirth, monthOfBirth, dayOfBirth, placeOfBirth, yearOfDeath, monthOfDeath, dayOfDeath, placeOfDeath, height, weight, deceased, bloodType, maritalStatus, serialNumber, hologramActivationDate, hologramStatus, hologramDateStatus, hologram, fictionalCharacter, mirror, alternateReality};
+  let character = { id, createdAt: Date.now() };
+      // let character = {uid, name, gender, yearOfBirth, monthOfBirth, dayOfBirth, placeOfBirth, yearOfDeath, monthOfDeath, dayOfDeath, placeOfDeath, height, weight, deceased, bloodType, maritalStatus, serialNumber, hologramActivationDate, hologramStatus, hologramDateStatus, hologram, fictionalCharacter, mirror, alternateReality};
   let characters = await getCharacters();
-  characters.unshift(character);  
+  characters.unshift(character); 
   await set(characters);
   return character;
 }
 
 export async function getCharacter(uid) {
   await fakeNetwork(`character:${uid}`);
+
   let characters = await localforage.getItem("characters");
   let character = characters.find((character) => character.uid === uid);
   return character ?? null;

@@ -18,7 +18,7 @@ describe(`WORK`, () => {
 characterdata.forEach((c) => {
   describe(`When Data-Driven-Testing with Cypress the ${c.testcase} time`, () => {
     it(`Then I should be able to dynamically generate testcases edit ${c.name}`, () => {
-      cy.visit("/characters/CHMA0000206844");
+      cy.visit("/characters/CHMA0000003106");
       cy.get("button").contains("Edit").click();
 
       cy.getSelEl("inputName").clear().type(c.name);
